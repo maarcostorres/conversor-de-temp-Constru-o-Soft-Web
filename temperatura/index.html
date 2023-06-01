@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
+<body>
+  <h2>Conversor de Unidade Temperatura</h2>
+  <label for="tempInput">Inserir Temperatura:</label>
+  <input type="text" id="tempInput">
+  <button onclick="converterTemperatura('celsius')">°C</button>
+  <button onclick="converterTemperatura('fahrenheit')">°F</button>
+  <button onclick="converterTemperatura('kelvin')">K</button>
+
+  <script>
+    function converterTemperatura(unidade) {
+      var temperaturaInput = document.getElementById("tempInput").value;
+      var temperatura = parseFloat(temperaturaInput);
+      var celsius, fahrenheit, kelvin;
+
+      if (unidade === 'celsius') {
+        celsius = temperatura;
+        fahrenheit = (celsius * 9/5) + 32;
+        kelvin = celsius + 273.15;
+      } else if (unidade === 'fahrenheit') {
+        fahrenheit = temperatura;
+        celsius = (fahrenheit - 32) * 5/9;
+        kelvin = (fahrenheit + 459.67) * 5/9;
+      } else if (unidade === 'kelvin') {
+        kelvin = temperatura;
+        celsius = kelvin - 273.15;
+        fahrenheit = (kelvin * 9/5) - 459.67;
+      }
+
+      var body = document.getElementsByTagName("body")[0];
+
+      if (celsius <= 0) {
+        body.style.backgroundColor = "blue";
+      } else if (celsius >= 100) {
+        body.style.backgroundColor = "red";
+      } else {
+        var red = Math.floor((celsius / 100) * 255);
+        var blue = Math.floor(((100 - celsius) / 100) * 255);
+        body.style.backgroundColor = "rgb(" + red + ", 0, " + blue + ")";
+      }
+
+      console.log("Celsius: " + celsius.toFixed(2) + " °C");
+      console.log("Fahrenheit: " + fahrenheit.toFixed(2) + " °F");
+      console.log("Kelvin: " + kelvin.toFixed(2) + " K");
+    }
+  </script>
+</body>
+</html>
